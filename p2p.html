@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>P2P Lending Interest Calculator</title>
+  </head>
+  <body>
+You can use this calculator to determine the potential returns on your P2P lending investments.
+<br>
+Here you have to enter the following details:
+<br>
+Investment Amount: The total amount you plan to invest in P2P lending.
+<br>
+Tenure: The duration for which you plan to lend your money.
+<br>
+Interest Rate: The expected annual return on your investment.
+<br>
+Facilitation Charge %: The percentage fee charged by the P2P platform for facilitating the lending.
+<br>
+Fees in €/₹/$: The fees charged by the platform in your preferred currency.
+<br>
+Recievable Interest: The interest amount you will receive after deducting the facilitation charges.
+<br>
+Total Payout: The total amount you will receive at the end of the tenure, including your initial investment and the receivable interest.<br> 
+    <p>Investment Amount</p>
+    <div> 
+    <input class="num_box" type="number" id="iamt" /></div>
+    <br />
+    <p>Tenure</p>
+    <div><input class="num_box" type="number" id="t" /></div>
+    <br />
+    <p>Interest Rate</p>
+    <div><input class="num_box" type="number" id="proi" /></div>
+    <br />
+    <p>Facilitation Charge %</p>
+    <div><input class="num_box" type="number" id="fc" /></div>
+    <br />
+    <p>Fees in €/₹/$</p>
+    <p class="rslt_box" id="m_fc"></p>
+    <p>Recievable Interest</p>
+    <p class="rslt_box" id="croi"></p>
+    <p>Total Payout</p> 
+    <p class="rslt_box" id="r_amt"></p>
+    <br />
+    <button onClick="myfunc()">Calculate</button>
+      <script>
+        function myfunc() {
+          let fc = document.getElementById("fc").value;
+          let iamt = document.getElementById("iamt").value;
+          let proi = document.getElementById("proi").value;
+          let t = document.getElementById("t").value;
+          
+          let i_fc, mfc, croi, ramt;
+          i_fc = (iamt * proi * t) / 100;
+          mfc = document.getElementById("m_fc");
+          ramt = document.getElementById("r_amt");
+          croi = document.getElementById("croi");
+          mfc.innerHTML = + (fc / 100) * i_fc;
+          croi.innerHTML = + i_fc - mfc.innerHTML; 
+          ramt.innerHTML =  Number(iamt) + Number(croi.innerHTML); 
+        }
+      </script>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 20px;
+        }
+
+        select {
+          width: 100px;
+        }
+        .num_box {
+            border: 2.5px solid #a20c0c;
+        }
+        .rslt_box {
+          
+          border: 2.5px solid #0c0ca2;
+          width: min-content;
+        }
+      </style>
+</body>
+</html>
