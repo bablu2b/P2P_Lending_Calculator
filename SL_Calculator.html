@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real-time % Calculator</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; padding: 16px; }
+    input { padding: 6px 8px; font-size: 16px; }
+    .out { margin-top: 10px; display: grid; gap: 6px; max-width: 420px; }
+    .row { display: flex; justify-content: space-between; gap: 12px; }
+    .row span:first-child { color: #444; }
+    .row span:last-child { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <label>
+    Enter number (decimal):
+    <input id="base" type="number" step="any" value="100" />
+  </label>
+
+  <div class="out" id="out"></div>
+
+  <script>
+    const deltasPercent = [-0.2, -0.5, -1, 0.2, 0.5, 1]; // in percent
+
+    const baseInput = document.getElementById('base');
+    const out = document.getElementById('out');
+
+    function fmt(n) {
+      if (!Number.isFinite(n)) return '—';
+      // remove ugly floating noise
+      return n.toLocaleString(undefined, { maximumFractionDigits: 12 });
+    }
+
+    function render() {
+      const base = Number(baseInput.value);
+
+      out.innerHTML = '';
+
+      deltasPercent.forEach(p => {
+        const updated = base * (1 + p / 100); // real-time calculation
+        const sign = p > 0 ? '+' : '';
+        const label = `${sign}${p}%`;
+
+        const row = document.createElement('div');
+        row.className = 'row';
+        row.innerHTML = `<span>${label}</span><span>${fmt(updated)}</span>`;
+        out.appendChild(row);
+      });
+    }
+
+    baseInput.addEventListener('input', render);
+    render();
+  </script>
+</body>
+</html>
