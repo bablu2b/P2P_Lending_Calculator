@@ -56,5 +56,30 @@
     baseInput.addEventListener('input', render);
     render();
   </script>
+  <style>
+    .out{
+  border: 2px solid #2980b9;
+  display: grid;
+  gap: 0;          /* important: no spacing between rows */
+  margin-top: 10px;
+  max-width: 420px;
+}
+
+.row{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 12px;
+  border-bottom: 1px solid #2980b9; /* the “line” */
+}
+
+.row:last-child{
+  border-bottom: none; /* no line after the last item */
+}
+
+.row span:first-child { color: #444; }
+.row span:last-child { font-variant-numeric: tabular-nums; }
+
+    </style>
 </body>
 </html>
